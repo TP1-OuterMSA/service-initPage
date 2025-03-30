@@ -16,7 +16,7 @@ export const MiddleContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../public/mju_logo.png');
+    background-image: url('/mju_logo.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 35%;

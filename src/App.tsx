@@ -25,7 +25,7 @@ function App() {
         <MainContainer>
           <TopContainer />
           <MiddleContainer>
-            <LinkBubble color={"darkblue"}>
+            <LinkBubble color={"darkblue"} onClick={ () => window.location.href = '/customers/query' }>
               서비스 1팀
             </LinkBubble>
             <LinkBubble color={"green"}>
