@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: initpage
+  namespace: msa
+  labels:
+    app: initpage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: initpage
+  template:
+    metadata:
+      labels:
+        app: initpage
+    spec:
+      containers:
+      - name: initpage
+        image: 809691348554.dkr.ecr.ap-northeast-2.amazonaws.com/initpage:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: initpage-service
+  namespace: msa
+spec:
+  selector:
+    app: initpage
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: ClusterIP
