@@ -8,7 +8,7 @@ env:
   APP_ENV: development
   REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
   VITE_API_URL: ${{ secrets.SERVER_HOST }}
-  APP_NAME: team06-fe
+  APP_NAME: initpage
   ECR_REPOSITORY: 809691348554.dkr.ecr.ap-northeast-2.amazonaws.com/initpage
 permissions:
   id-token: write
@@ -74,7 +74,7 @@ jobs:
           ls -la charts/
           echo "Checking services directory:"
           ls -la charts/services/ || echo "Services directory not found"
-          find . -name "team06-fe" -type d
+          find . -name "initpage" -type d
 
       - name: Update image tag in Helm chart
         run: |
