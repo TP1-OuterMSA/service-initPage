@@ -25,22 +25,22 @@ function App() {
         <MainContainer>
           <TopContainer />
           <MiddleContainer>
-            <LinkBubble color={"darkblue"} onClick={ () => window.location.href = '/' }>
+            <LinkBubble color={"darkblue"} onClick={ () => window.location.href = '/team1' }>
               서비스 1팀
             </LinkBubble>
-            <LinkBubble color={"green"} onClick={ () => window.location.href = '/team2/community' }>
+            <LinkBubble color={"green"} onClick={ () => window.location.href = '/team2' }>
               서비스 2팀
             </LinkBubble>
-            <LinkBubble color={"blue"} onClick={ () => window.location.href = '/team3/analytics' }>
+            <LinkBubble color={"blue"} onClick={ () => window.location.href = '/team3' }>
               서비스 3팀
             </LinkBubble>
-            <LinkBubble color={"darkgreen"} onClick={ () => window.location.href = '/' }>
+            <LinkBubble color={"darkgreen"} onClick={ () => window.location.href = '/team4' }>
               서비스 4팀
             </LinkBubble>
-            <LinkBubble color={"green"} onClick={ () => window.location.href = '/' }>
+            <LinkBubble color={"green"} onClick={ () => window.location.href = '/team5' }>
               서비스 5팀
             </LinkBubble>
-            <LinkBubble color={"brown"} onClick={ () => window.location.href = '/' }>
+            <LinkBubble color={"brown"} onClick={ () => window.location.href = '/team6' }>
               서비스 6팀
             </LinkBubble>
           </MiddleContainer>
