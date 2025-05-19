@@ -16,12 +16,19 @@ import {
   LeftLogoWrapper,
   MainContainer,
   MiddleContainer,
-  OuterContainer,
+  OuterContainer, 
+  PostCommentCount, 
+  PostCreatedAt, 
+  PostLikeCount, 
+  PostLine, 
+  PostTitle, 
+  PostWrapper,
   TodayFoodWrapper,
-  TodayLeftWrapper,
   TopContainer
 } from "./mainStyle.ts";
 import { createGlobalStyle } from 'styled-components';
+import {useEffect, useState} from "react";
+import {getCommunityPost, getThisWeekMeals} from "./service/serviceApi.ts";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -39,7 +46,77 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+interface Post {
+  id: number;
+  title: string;
+  createdAt: string;
+  commentCount: number;
+  likeCount: number;
+}
+
+interface Meal {
+  id: number,
+  content: string,
+}
+
 function App() {
+  const [ breakfast, setBreakfast ] = useState<Meal[]>([]);
+  const [ lunch, setLunch ] = useState<Meal[]>([]);
+  const [ dinner, setDinner ] = useState<Meal[]>([]);
+  const [ posts, setPosts ] = useState<Post[]>([]);
+  //const [ tickets, setTickets ] = useState<number>(0);
+
+  const now = new Date();
+
+  useEffect(() => {
+
+
+    const initSetting = async () => {
+      try {
+        const postResponse = await getCommunityPost();
+        const postList: Post[] = [];
+        for( const post of postResponse ){
+          const temp: Post = {
+            id: post.id,
+            title: post.title,
+            createdAt: post.createdAt,
+            commentCount: post.commentCount,
+            likeCount: post.likeCount
+          }
+          postList.push( temp )
+        }
+        setPosts(postList);
+
+        const today = new Date();
+
+        const mealResponse = await getThisWeekMeals();
+        for( const meal of mealResponse ){
+          if( meal.day[2] == today.getDate() ) {
+            const currentList: Meal[] = []
+            const foods: string[] = meal.menuContent.split( ' ' )
+            let idHash = 0
+            for( const food of foods ) {
+              currentList.push( {
+                id: meal.id + idHash,
+                content: food
+              })
+              idHash++
+            }
+            if( meal.mealType == 'breakfast' ) setBreakfast(currentList);
+            else if( meal.mealType == 'lunch' ) setLunch(currentList);
+            else if( meal.mealType == 'dinner' ) setDinner(currentList);
+          }
+        }
+
+      } catch ( err ) {
+        console.error( "API 호출 중 에러가 발생했습니다", err );
+        console.log( "정보 조회에 실패했습니다" )
+      }
+    }
+    initSetting();
+  }, []);
+
+
 
   return (
       <>
@@ -82,30 +159,63 @@ function App() {
               <BackgroundImage />
               <ContentContainer>
                 <ContentTodayInformationBlock>
-                  2025년 05월 20일
+                  { now.getFullYear() + "년 " + ( now.getMonth() + 1 ) + "월 " + now.getDate() + "일" }
                 </ContentTodayInformationBlock>
                 <ContentBlockLine>
                   <ContentBlock>
-                    <BlockTitle> 오늘의 학식 </BlockTitle>
+                    <BlockTitle> 오늘의 아침 </BlockTitle>
                     <BlockContent>
-                      <TodayFoodWrapper> 흰쌀밥 </TodayFoodWrapper>
-                      <TodayFoodWrapper> 소고기미역국 </TodayFoodWrapper>
-                      <TodayFoodWrapper> 찹쌀탕수육 </TodayFoodWrapper>
-                      <TodayFoodWrapper> 배추김치 </TodayFoodWrapper>
-                      <TodayFoodWrapper> 시금치무침 </TodayFoodWrapper>
-                      <TodayFoodWrapper> 간장소불고기 </TodayFoodWrapper>
+                      {
+                        breakfast.map(
+                            ( meal ) => (
+                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                            )
+                        )
+                      }
                     </BlockContent>
                   </ContentBlock>
                   <ContentBlock>
-                    <BlockTitle> 남은 식권 개수 </BlockTitle>
+                    <BlockTitle> 오늘의 점심 </BlockTitle>
                     <BlockContent>
-                      <TodayLeftWrapper> 1 </TodayLeftWrapper>
+                      {
+                        lunch.map(
+                            ( meal ) => (
+                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                            )
+                        )
+                      }
+                    </BlockContent>
+                  </ContentBlock>
+                  <ContentBlock>
+                    <BlockTitle> 오늘의 저녁 </BlockTitle>
+                    <BlockContent>
+                      {
+                        dinner.map(
+                            ( meal ) => (
+                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                            )
+                        )
+                      }
                     </BlockContent>
                   </ContentBlock>
                 </ContentBlockLine>
                 <ContentBlockLine>
                   <ContentLongBlock>
                     <BlockTitle> 최근 게시글 </BlockTitle>
+                    <PostWrapper>
+                      {
+                        posts.map(
+                            ( p ) => (
+                                <PostLine key={ p.id }>
+                                  <PostCommentCount> { p.id } </PostCommentCount>
+                                  <PostTitle> { p.title } </PostTitle>
+                                  <PostCreatedAt> { p.createdAt } </PostCreatedAt>
+                                  <PostLikeCount> { p.likeCount } </PostLikeCount>
+                                </PostLine>
+                            )
+                        )
+                      }
+                    </PostWrapper>
                   </ContentLongBlock>
                 </ContentBlockLine>
               </ContentContainer>
