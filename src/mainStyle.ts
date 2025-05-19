@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import "./font.css"
 
 export const MainContainer = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
+    font-family: '210manbok';
 `
 export const MiddleContainer = styled.div`
     display: flex;
@@ -120,8 +122,8 @@ export const ContentTodayInformationBlock = styled.div`
     width: 85%;
     background-color: white;
     font-weight: bold;
-    font-size: 1.5rem;
-    padding: 10px;
+    font-size: 1.3rem;
+    padding: 15px;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 `
 export const ContentBlockLine = styled.div`
@@ -133,7 +135,7 @@ export const ContentBlockLine = styled.div`
 export const ContentBlock = styled.div`
     border-radius: 5px;
     background-color: white;
-    width: 40%;
+    width: 25%;
     height: 35vh;
     display: flex;
     flex-direction: column;
@@ -160,7 +162,7 @@ export const BlockContent = styled.div`
     padding-top: 5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 `
@@ -177,3 +179,31 @@ export const TodayLeftWrapper = styled.div`
 `
 
 // 커뮤니티 게시글
+export const PostWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-block: 10px;
+`
+export const PostLine = styled.div`
+    width: 95%;
+    display: flex;
+    text-align: center;
+    
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+`
+export const PostTitle = styled.div`
+    flex: 5;
+`
+export const PostLikeCount = styled.div`
+    flex: 1;
+`
+export const PostCommentCount = styled.div`
+    flex: 1;
+`
+export const PostCreatedAt = styled.div`
+    flex: 3;
+`

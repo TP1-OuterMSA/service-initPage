@@ -2,23 +2,23 @@ import axiosInstance, {ApiResponse} from "./axiosInstance.ts";
 
 // 가져온 API 결과 형태를 보고 수정 필요
 interface MealItem {
-    date: string,
+    id: number;
+    day: number[],
     mealType: string,
-    content: string,
+    menuContent: string,
     title: string,
     info: string
 }
 export const getThisWeekMeals = async (
 
 ): Promise<MealItem[]> => {
-    const response: ApiResponse<MealItem[]> = await axiosInstance.get(
+    return await axiosInstance.get(
         "/api/team4/meal/items",
     );
-    return response.data;
 }
 
 // 남은 식권 수를 가져오는 API 연동 필요
-export const getLeftTicket = async (
+export const getTicket = async (
 
 ): Promise<number> => {
     const response: ApiResponse<number> = await axiosInstance.get(
@@ -39,9 +39,12 @@ interface CommunityPost {
 export const getCommunityPost = async (
 
 ): Promise<CommunityPost[]> => {
-    const response: ApiResponse<CommunityPost[]> = await axiosInstance.get(
+    const response: CommunityPost[] = await axiosInstance.get(
         '/api/team2/community/getPosts',
         {
+            headers: {
+                'user-id': 1
+            },
             params: {
                 cursor: 0,
                 count: 10,
@@ -49,5 +52,9 @@ export const getCommunityPost = async (
             }
         }
     );
-    return response.data;
+    const result: CommunityPost[] = [];
+    for( const post of response ){
+        result.push( post );
+    }
+    return result;
 }
