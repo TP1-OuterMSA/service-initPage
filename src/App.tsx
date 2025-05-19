@@ -16,7 +16,13 @@ import {
   LeftLogoWrapper,
   MainContainer,
   MiddleContainer,
-  OuterContainer, PostCommentCount, PostCreatedAt, PostLikeCount, PostLine, PostTitle, PostWrapper,
+  OuterContainer, 
+  PostCommentCount, 
+  PostCreatedAt, 
+  PostLikeCount, 
+  PostLine, 
+  PostTitle, 
+  PostWrapper,
   TodayFoodWrapper,
   TopContainer
 } from "./mainStyle.ts";
