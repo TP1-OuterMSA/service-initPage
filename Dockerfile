@@ -19,6 +19,7 @@ FROM nginx:alpine
 
 # Nginx의 기본 정적 파일 경로에 빌드된 파일 복사
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 포트 80 노출 ->> 이 작업을 수행하면 추후 k8s 서비스도 targetPort가 80이 되어야 함
 EXPOSE 80
