@@ -3,7 +3,7 @@ import axiosInstance, {ApiResponse} from "./axiosInstance.ts";
 // 가져온 API 결과 형태를 보고 수정 필요
 interface MealItem {
     id: number;
-    day: number[],
+    date: string,
     mealType: string,
     menuContent: string,
     title: string,

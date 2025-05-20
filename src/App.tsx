@@ -55,7 +55,7 @@ interface Post {
 }
 
 interface Meal {
-  id: number,
+  id: string,
   content: string,
 }
 
@@ -91,13 +91,14 @@ function App() {
 
         const mealResponse = await getThisWeekMeals();
         for( const meal of mealResponse ){
-          if( meal.day[2] == today.getDate() ) {
+          const now: string[] = meal.date.split("-")
+          if( now[2] == today.getDate().toString() ) {
             const currentList: Meal[] = []
             const foods: string[] = meal.menuContent.split( ' ' )
-            let idHash = 0
+            let idHash = 0;
             for( const food of foods ) {
               currentList.push( {
-                id: meal.id + idHash,
+                id: meal.id + idHash.toString(),
                 content: food
               })
               idHash++
@@ -168,7 +169,7 @@ function App() {
                       {
                         breakfast.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "1" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
@@ -180,7 +181,7 @@ function App() {
                       {
                         lunch.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "2" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
@@ -192,7 +193,7 @@ function App() {
                       {
                         dinner.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "3" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
