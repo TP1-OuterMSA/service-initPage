@@ -4,6 +4,9 @@ FROM node:18-alpine AS build
 # 작업 디렉토리를 현재 디렉토리로 설정
 WORKDIR /usr/src/app
 
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 # 의존성 파일 복사 및 설치
 COPY package.json package-lock.json ./
 RUN npm ci
