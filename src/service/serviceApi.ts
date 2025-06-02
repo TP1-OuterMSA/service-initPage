@@ -2,12 +2,21 @@ import axiosInstance, {ApiResponse} from "./axiosInstance.ts";
 
 // 가져온 API 결과 형태를 보고 수정 필요
 interface MealItem {
-    id: number;
-    date: string,
+    menuId: number,
+    date: Date,
     mealType: string,
     menuContent: string,
-    title: string,
-    info: string
+    menuTitle: string,
+    extraInfo: string,
+    foods: FoodItem[]
+}
+interface FoodItem {
+    mealId: number,
+    mealName: string,
+    mealCategory: string,
+    nutrition: string,
+    calorie: number,
+    allergy: string
 }
 export const getThisWeekMeals = async (
 
@@ -43,7 +52,7 @@ export const getCommunityPost = async (
         '/api/team2/community/getPosts',
         {
             headers: {
-                'user-id': 1
+                'userId': 1
             },
             params: {
                 cursor: 0,

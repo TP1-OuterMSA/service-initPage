@@ -164,9 +164,10 @@ export const BlockContent = styled.div`
     flex-direction: column;
     gap: 15px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 10px;
 `
 
 // 오늘의 식단

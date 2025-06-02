@@ -16,13 +16,7 @@ import {
   LeftLogoWrapper,
   MainContainer,
   MiddleContainer,
-  OuterContainer, 
-  PostCommentCount, 
-  PostCreatedAt, 
-  PostLikeCount, 
-  PostLine, 
-  PostTitle, 
-  PostWrapper,
+  OuterContainer, PostCommentCount, PostCreatedAt, PostLikeCount, PostLine, PostTitle, PostWrapper,
   TodayFoodWrapper,
   TopContainer
 } from "./mainStyle.ts";
@@ -70,9 +64,8 @@ function App() {
 
   useEffect(() => {
 
-
-    const initSetting = async () => {
-      try {
+    const postSetting = async () => {
+      try{
         const postResponse = await getCommunityPost();
         const postList: Post[] = [];
         for( const post of postResponse ){
@@ -86,19 +79,30 @@ function App() {
           postList.push( temp )
         }
         setPosts(postList);
+      } catch ( err ) {
+        console.error( "커뮤니티 게시글 API 호출 중 에러가 발생했습니다", err );
+        console.log( "게시글 조회에 실패했습니다" )
+      }
+    }
 
+    const mealSetting = async () => {
+      try {
         const today = new Date();
+        const dateString = today.toISOString().split('T')[0];
 
         const mealResponse = await getThisWeekMeals();
         for( const meal of mealResponse ){
-          const now: string[] = meal.date.split("-")
-          if( now[2] == today.getDate().toString() ) {
+          if( meal.date.toString() == dateString ) {
+            console.log( meal )
             const currentList: Meal[] = []
-            const foods: string[] = meal.menuContent.split( ' ' )
-            let idHash = 0;
-            for( const food of foods ) {
+            let idHash = 0
+            //const foodList = meal.foods
+            const foodList = meal.menuContent.split(" ")
+            for( const food of foodList ) {
               currentList.push( {
-                id: meal.id + idHash.toString(),
+                //id: food.mealId + idHash,
+                //content: food.mealName
+                id: meal.menuId + idHash,
                 content: food
               })
               idHash++
@@ -110,11 +114,12 @@ function App() {
         }
 
       } catch ( err ) {
-        console.error( "API 호출 중 에러가 발생했습니다", err );
-        console.log( "정보 조회에 실패했습니다" )
+        console.error( "학식 메뉴 조회 API 호출 중 에러가 발생했습니다", err );
+        console.log( "학식 메뉴 조회에 실패했습니다" )
       }
     }
-    initSetting();
+    postSetting();
+    mealSetting();
   }, []);
 
 
