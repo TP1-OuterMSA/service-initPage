@@ -93,7 +93,6 @@ function App() {
         const mealResponse = await getThisWeekMeals();
         for( const meal of mealResponse ){
           if( meal.date.toString() == dateString ) {
-            console.log( meal )
             const currentList: Meal[] = []
             let idHash = 0
             //const foodList = meal.foods
@@ -102,7 +101,7 @@ function App() {
               currentList.push( {
                 //id: food.mealId + idHash,
                 //content: food.mealName
-                id: meal.menuId + idHash,
+                id: meal.menuId + idHash.toString(),
                 content: food
               })
               idHash++
