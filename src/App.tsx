@@ -49,7 +49,7 @@ interface Post {
 }
 
 interface Meal {
-  id: number,
+  id: string,
   content: string,
 }
 
@@ -174,7 +174,7 @@ function App() {
                       {
                         breakfast.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "1" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
@@ -186,7 +186,7 @@ function App() {
                       {
                         lunch.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "2" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
@@ -198,7 +198,7 @@ function App() {
                       {
                         dinner.map(
                             ( meal ) => (
-                                <TodayFoodWrapper key={ meal.id }> { meal.content} </TodayFoodWrapper>
+                                <TodayFoodWrapper key={ "3" + meal.id }> { meal.content} </TodayFoodWrapper>
                             )
                         )
                       }
