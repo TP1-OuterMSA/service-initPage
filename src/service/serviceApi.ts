@@ -8,15 +8,11 @@ interface MealItem {
     menuContent: string,
     menuTitle: string,
     extraInfo: string,
-    foods: FoodItem[]
+    meals: MealSummary[]
 }
-interface FoodItem {
-    mealId: number,
+interface MealSummary {
     mealName: string,
     mealCategory: string,
-    nutrition: string,
-    calorie: number,
-    allergy: string
 }
 export const getThisWeekMeals = async (
 
