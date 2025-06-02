@@ -136,7 +136,7 @@ export const ContentBlock = styled.div`
     border-radius: 5px;
     background-color: white;
     width: 25%;
-    height: 35vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -145,7 +145,7 @@ export const ContentLongBlock = styled.div`
     border-radius: 5px;
     background-color: white;
     width: 85%;
-    height: 35vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);

@@ -18,7 +18,7 @@ export type ErrorResponse = {
 }
 
 const axiosInstance = axios.create({
-    baseURL: "http://k8s-msaservices-7d023f0bb9-676035063.ap-northeast-2.elb.amazonaws.com",
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
