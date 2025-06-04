@@ -2,7 +2,7 @@ name: Frontend Development Deploy
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
  
 env:
   APP_ENV: development
