@@ -49,7 +49,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Save short SHA
-        id: short-sha
+        id: short-sha 
         run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       - name: Build, tag, and push image to Amazon ECR
